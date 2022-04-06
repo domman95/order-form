@@ -7,6 +7,7 @@ const Bgc = styled.div`
   right: 0;
   width: 100%;
   max-width: 700px;
+  z-index: -1;
 
   img {
     width: 100%;

@@ -11,6 +11,8 @@ const GlobalStyles = createGlobalStyle`
     --darkGreen: #CFDBD5;
     --black: #242423;
     --white: #F8F5F5;
+    --boxShadow: 0px 4px 4px rgba(51, 53, 51, 0.12);
+    --borderRadius: 0.4rem;
   }
 
   *, *::before, *::after {

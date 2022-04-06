@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function additionalValues(inputs) {
+export function additionalValues(inputs) {
   switch (inputs.type) {
     case 'pizza':
       return {
@@ -38,20 +38,6 @@ export default function useForm(initial = {}) {
     });
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-
-    const result = {
-      name: inputs.name,
-      preparation_time: inputs.preparation_time,
-      type: inputs.type,
-      ...additionalValues(inputs),
-    };
-    console.log(result);
-
-    resetForm();
-  }
-
   function clearForm() {
     const blankState = Object.fromEntries(
       Object.entries(inputs).map(([key]) => [key, ''])
@@ -67,7 +53,6 @@ export default function useForm(initial = {}) {
   return {
     inputs,
     handleChange,
-    handleSubmit,
     clearForm,
     resetForm,
   };

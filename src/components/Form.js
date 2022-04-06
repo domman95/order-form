@@ -1,4 +1,4 @@
-import useForm from '../lib/useForm';
+import useForm, { additionalValues } from '../lib/useForm';
 import AdditionalFormFields from './AdditionalFormFields';
 import { Label } from './Input';
 import Radio from './Radio';
@@ -15,7 +15,28 @@ const INITIAL_FORM_VALUES = {
 };
 
 export default function Form() {
-  const { inputs, handleChange, handleSubmit } = useForm(INITIAL_FORM_VALUES);
+  const { inputs, handleChange } = useForm(INITIAL_FORM_VALUES);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const result = {
+      name: inputs.name,
+      preparation_time: inputs.preparation_time,
+      type: inputs.type,
+      ...additionalValues(inputs),
+    };
+
+    fetch('https://frosty-wood-6558.getsandbox.com:443/dishes', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ ...result }),
+    })
+      .then((res) => console.log(res.json()))
+      .catch((err) => console.log(err));
+  };
 
   return (
     <FormStyles onSubmit={handleSubmit}>

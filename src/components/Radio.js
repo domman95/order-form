@@ -50,7 +50,6 @@ export default function Radio({ name, title, onChange }) {
         type="radio"
         name="type"
         id={name}
-        defaultChecked={name === 'pizza'}
         value={name}
         onChange={onChange}
       />

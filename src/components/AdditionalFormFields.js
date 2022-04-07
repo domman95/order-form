@@ -39,7 +39,6 @@ export default function AdditionalFormFields({ title, inputs, handleChange }) {
             name="diameter"
             placeholder="32-48"
             step={0.01}
-            fixed={2}
             min={32}
             max={48}
             onChange={handleChange}

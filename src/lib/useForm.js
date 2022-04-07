@@ -29,7 +29,10 @@ export default function useForm(initial = {}) {
 
     if (type === 'number') {
       value = Math.max(Number(min), Math.min(Number(max), Number(value)));
-      value = Number(value).toFixed(2);
+    }
+
+    if (type === 'number' && name === 'diameter') {
+      value = +Number(value).toFixed(2);
     }
 
     setInputs({

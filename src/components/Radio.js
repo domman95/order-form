@@ -1,3 +1,4 @@
+import { Field } from 'redux-form';
 import styled from 'styled-components';
 
 const Container = styled.li`
@@ -43,15 +44,15 @@ const Container = styled.li`
   }
 `;
 
-export default function Radio({ name, title, onChange }) {
+export default function Radio({ name, title }) {
   return (
     <Container>
-      <input
+      <Field
+        component="input"
         type="radio"
         name="type"
         id={name}
         value={name}
-        onChange={onChange}
       />
       <label htmlFor={name}>{title}</label>
     </Container>

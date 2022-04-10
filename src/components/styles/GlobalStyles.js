@@ -7,6 +7,8 @@ const GlobalStyles = createGlobalStyle`
     --heroFont: 'Bungee', cursive;
     --mainFont: 'Quicksand', sans-serif;
     --yellow: #F5CB5C;
+    --errorRed: #FD948A;
+    --successGreen: #7AF086;
     --lightGreen: #E8EDDF;
     --darkGreen: #CFDBD5;
     --black: #242423;

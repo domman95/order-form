@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import {
   reduxForm,
   Field,
@@ -12,18 +13,17 @@ import { renderField } from '../lib/renderField';
 import AdditionalFormFields from './AdditionalFormFields';
 import { additionalValues } from '../lib/additionalValues';
 import { INITIAL_FORM_VALUES } from '../lib/initialFormValues';
-import { useState } from 'react';
 import DisplayMessage from './DisplayMessage';
-import { useEffect } from 'react';
 
 let Form = (props) => {
   const { handleSubmit, whatType, submitting, reset } = props;
 
-  const [fetchStatus, setFetchStatus] = useState({
+  const [{ status, message }, setFetchStatus] = useState({
     status: null,
     message: '',
   });
-  const { status, message } = fetchStatus;
+
+  console.log(props);
 
   useEffect(() => {
     const closeDisplayMessageAfterDelay = () =>
@@ -69,14 +69,12 @@ let Form = (props) => {
         throw new SubmissionError('🚫 Something went wrong!');
       })
       .then((res) => {
-        console.log(res);
         setFetchStatus({
           status: true,
           message: '✅ Your order has been send!',
         });
       })
       .catch((err) => {
-        console.log(err);
         setFetchStatus({
           status: false,
           message: err.errors,

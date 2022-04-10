@@ -45,6 +45,7 @@ export const FormStyles = styled.form`
         display: block;
         width: 0;
         height: 0;
+        opacity: 0;
       }
 
       input[type='radio']:focus + label {

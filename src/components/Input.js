@@ -31,6 +31,11 @@ export const Label = styled.label`
     border-radius: var(--borderRadius);
     box-shadow: var(--boxShadow);
 
+    &[type='time'] {
+      min-width: calc(100% - 2rem);
+      -webkit-appearance: none;
+    }
+
     &::placeholder {
       color: var(--black);
       opacity: 0.4;

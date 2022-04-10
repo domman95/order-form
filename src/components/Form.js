@@ -14,6 +14,7 @@ import AdditionalFormFields from './AdditionalFormFields';
 import { additionalValues } from '../lib/additionalValues';
 import { INITIAL_FORM_VALUES } from '../lib/initialFormValues';
 import DisplayMessage from './DisplayMessage';
+import { formatTime } from '../lib/formatTime';
 
 let Form = (props) => {
   const { handleSubmit, whatType, submitting, reset } = props;
@@ -22,8 +23,6 @@ let Form = (props) => {
     status: null,
     message: '',
   });
-
-  console.log(props);
 
   useEffect(() => {
     const closeDisplayMessageAfterDelay = () =>
@@ -46,33 +45,26 @@ let Form = (props) => {
   const onSubmit = (values) => {
     const result = {
       name: values.name,
-      preparation_time: values.preparation_time,
+      preparation_time: formatTime(values.preparation_time),
       type: values.type,
       ...additionalValues(values),
     };
 
-    const sendRequest = fetch(
-      'https://frosty-wood-6558.getsandbox.com:443/dishes',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ ...result }),
-      }
-    )
+    fetch('/.netlify/functions/send-order', {
+      method: 'POST',
+      body: JSON.stringify(result),
+    })
       .then((res) => {
         if (res.ok) {
           reset();
-          return res.json();
+          setFetchStatus({
+            status: true,
+            message: '✅ Your order has been send!',
+          });
+          return;
         }
+
         throw new SubmissionError('🚫 Something went wrong!');
-      })
-      .then((res) => {
-        setFetchStatus({
-          status: true,
-          message: '✅ Your order has been send!',
-        });
       })
       .catch((err) => {
         setFetchStatus({
@@ -80,8 +72,6 @@ let Form = (props) => {
           message: err.errors,
         });
       });
-
-    return sendRequest;
   };
 
   return (
@@ -105,7 +95,8 @@ let Form = (props) => {
             type="time"
             name="preparation_time"
             id="preparation_time"
-            step={1}
+            defaultValue="00:00:00"
+            step="1"
           />
         </Label>
         <Label>

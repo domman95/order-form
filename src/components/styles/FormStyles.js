@@ -39,10 +39,14 @@ export const FormStyles = styled.form`
         display: block;
         width: 100%;
         padding: 2rem;
+        position: relative;
       }
 
       input[type='radio'] {
         display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 0;
         height: 0;
         opacity: 0;
